@@ -1,0 +1,33 @@
+/* Color theme dots/fills per category */
+.dot-auth    { background: var(--ink); }
+.dot-hr      { background: var(--green); }
+.dot-it      { background: var(--blue); }
+.dot-billing { background: var(--amber); }
+.dot-general { background: var(--purple); }
+.dot-unknown { background: var(--red); }
+
+.bg-auth    { background: var(--paper-2); color: var(--ink-2); }
+.bg-hr      { background: var(--green-bg); color: var(--green); }
+.bg-it      { background: var(--blue-bg); color: var(--blue); }
+.bg-billing { background: var(--amber-bg); color: var(--amber); }
+.bg-general { background: var(--purple-bg); color: var(--purple); }
+.bg-unknown { background: var(--red-bg); color: var(--red); }
+
+.priority-high   { color: var(--red); font-weight: 500; }
+.priority-medium { color: var(--amber); }
+.priority-low    { color: var(--green); }
+
+/* ── Empty state ── */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--ink-4);
+}
+
+.empty-icon { font-size: 28px; margin-bottom: 10px; opacity: 0.4; }
+.empty-text { font-size: 13px; color: var(--ink-4); }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 2px; }

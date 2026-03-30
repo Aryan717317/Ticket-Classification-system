@@ -1,0 +1,34 @@
+/* ── Results section ── */
+.results { padding: 0 32px 40px; }
+
+.result-entry {
+  margin-top: 28px;
+  animation: fadeUp 0.35s ease forwards;
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.result-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.result-timestamp {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--ink-4);
+}
+
+.result-ticket-preview {
+  font-size: 13px;
+  color: var(--ink-2);
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  background: var(--paper-2);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--line-2);
+  font-style: italic;
+  line-height: 1.5;
+}
