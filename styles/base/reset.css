@@ -1,0 +1,19 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 15px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.app { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+.main { display: flex; flex-direction: column; overflow: hidden; }
+.content { flex: 1; overflow-y: auto; }
+.view { display: none; }
+.view.active { display: block; }
