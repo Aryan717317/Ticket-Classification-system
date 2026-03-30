@@ -1,0 +1,35 @@
+/* ── Settings view ── */
+.settings-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--line-2);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line-2);
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: #fff;
+  gap: 20px;
+}
+
+.setting-info { flex: 1; }
+.setting-name { font-size: 13.5px; color: var(--ink); margin-bottom: 2px; }
+.setting-desc { font-size: 12px; color: var(--ink-3); }
+
+.setting-select {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  padding: 5px 10px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-sm);
+  background: var(--paper-2);
+  color: var(--ink);
+  cursor: pointer;
+  outline: none;
+}

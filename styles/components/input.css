@@ -1,0 +1,85 @@
+/* ── Input zone ── */
+.input-zone {
+  padding: 32px 32px 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.input-wrap {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.input-wrap:focus-within {
+  border-color: rgba(14,14,14,0.3);
+  box-shadow: 0 0 0 3px rgba(14,14,14,0.05);
+}
+
+.ticket-textarea {
+  width: 100%;
+  min-height: 90px;
+  padding: 16px 18px 48px;
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: vertical;
+  max-height: 260px;
+}
+
+.ticket-textarea::placeholder { color: var(--ink-4); }
+
+.input-footer {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+}
+
+.char-count {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--ink-4);
+}
+
+.input-actions { display: flex; gap: 6px; align-items: center; }
+
+/* ── Quick examples ── */
+.examples-row {
+  padding: 14px 32px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ex-label {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--ink-4);
+  letter-spacing: 0.05em;
+  margin-right: 2px;
+  flex-shrink: 0;
+}
+
+.ex-chip {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--line-2);
+  background: var(--paper-2);
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.ex-chip:hover { background: var(--paper-3); border-color: var(--line-2); color: var(--ink); }

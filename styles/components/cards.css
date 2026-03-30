@@ -1,0 +1,197 @@
+/* Classification cards */
+.classification-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.class-card {
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition);
+}
+
+.class-card.winner { border-width: 1.5px; }
+
+.class-card.winner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+
+.card-auth.winner { border-color: #1a1a1a; }
+.card-auth.winner::before { background: var(--ink); }
+.card-auth .class-bar-fill { background: var(--ink); }
+
+.card-hr.winner { border-color: #1e6b45; }
+.card-hr.winner::before { background: var(--green); }
+.card-hr .class-bar-fill { background: var(--green); }
+
+.card-it.winner { border-color: #1a3f72; }
+.card-it.winner::before { background: var(--blue); }
+.card-it .class-bar-fill { background: var(--blue); }
+
+.card-billing.winner { border-color: #8a5c00; }
+.card-billing.winner::before { background: var(--amber); }
+.card-billing .class-bar-fill { background: var(--amber); }
+
+.card-general.winner { border-color: #3d2c7a; }
+.card-general.winner::before { background: var(--purple); }
+.card-general .class-bar-fill { background: var(--purple); }
+
+.card-unknown.winner { border-color: #7a1f1f; }
+.card-unknown.winner::before { background: var(--red); }
+.card-unknown .class-bar-fill { background: var(--red); }
+
+.class-name { font-size: 12.5px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+.class-score {
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.class-bar {
+  height: 3px;
+  background: var(--paper-3);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.class-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0%;
+}
+
+.class-keywords {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--ink-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Verdict panel ── */
+.verdict-panel {
+  border-radius: var(--radius);
+  border: 1px solid var(--line-2);
+  background: var(--paper-2);
+  overflow: hidden;
+}
+
+.verdict-top {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+
+.verdict-category {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.verdict-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.verdict-cat-name { font-size: 13.5px; font-weight: 500; }
+
+.verdict-badge {
+  font-size: 10.5px;
+  font-family: var(--mono);
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 400;
+}
+
+.verdict-body {
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.vd-label {
+  font-size: 10px;
+  font-family: var(--mono);
+  color: var(--ink-4);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+.vd-value {
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.vd-sla {
+  font-family: var(--mono);
+  font-size: 12.5px;
+}
+
+.verdict-reply {
+  padding: 12px 16px;
+  border-top: 1px solid var(--line);
+  font-size: 12.5px;
+  color: var(--ink-2);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.verdict-reply strong {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--ink-3);
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ── Sentiment strip ── */
+.sentiment-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.sentiment-pill {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-family: var(--mono);
+}
+
+.sent-negative { background: #fdf0f0; color: var(--red); }
+.sent-neutral  { background: var(--paper-3); color: var(--ink-3); }
+.sent-positive { background: var(--green-bg); color: var(--green); }
+.sent-urgent   { background: var(--amber-bg); color: var(--amber); }
+
+@media (max-width: 768px) {
+  .classification-grid { grid-template-columns: 1fr; }
+  .verdict-body { grid-template-columns: 1fr; }
+}
