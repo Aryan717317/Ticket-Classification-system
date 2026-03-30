@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triage — AI Ticket Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+<!-- Base Styles -->
+<link rel="stylesheet" href="styles/base/tokens.css">
+<link rel="stylesheet" href="styles/base/reset.css">
+
+<!-- Layout & Components -->
+<link rel="stylesheet" href="styles/components/sidebar.css">
+<link rel="stylesheet" href="styles/components/topbar.css">
+<link rel="stylesheet" href="styles/components/buttons.css">
+<link rel="stylesheet" href="styles/components/input.css">
+<link rel="stylesheet" href="styles/components/cards.css">
+<link rel="stylesheet" href="styles/components/table.css">
+<link rel="stylesheet" href="styles/components/settings.css">
+
+<!-- Views -->
+<link rel="stylesheet" href="styles/views/classify.css">
+<link rel="stylesheet" href="styles/views/analytics.css">
+
+<!-- Utilities -->
+<link rel="stylesheet" href="styles/utilities/animations.css">
+<link rel="stylesheet" href="styles/utilities/helpers.css">
+
+</head>
+<body>
+
+<div class="app">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 14 14"><path d="M2 2h4v4H2zM8 2h4v4H8zM2 8h4v4H2zM8 8h4v4H8z" opacity="0.7"/><path d="M5 5h4v4H5z"/></svg>
+      </div>
+      <div>
+        <div class="logo-text">Triage</div>
+        <div class="logo-sub">AI Ticket System</div>
+      </div>
+    </div>
+
+    <nav class="nav-section">
+      <div class="nav-label">Workspace</div>
+      <button class="nav-item active" data-view="classify">
+        <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 3h12v2H2zM2 7h8v2H2zM2 11h10v2H2z"/></svg>
+        Classify
+        <span class="nav-badge" id="badge-classify">0</span>
+      </button>
+      <button class="nav-item" data-view="queue">
+        <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3zm0 6a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V9z"/></svg>
+        Ticket Queue
+        <span class="nav-badge" id="badge-queue">0</span>
+      </button>
+      <button class="nav-item" data-view="analytics">
+        <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 12h2V7H2zm4 0h2V4H6zm4 0h2V9h-2zM1 13h14v1H1z"/></svg>
+        Analytics
+      </button>
+      <button class="nav-item" data-view="settings">
+        <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 5a3 3 0 1 0 0 6A3 3 0 0 0 8 5zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/><path d="M6.343 1.414L5.636 2.12A5.955 5.955 0 0 0 4.22 4.22L3.513 4.928a1 1 0 0 0 0 1.415l.707.707a6 6 0 0 0 0 2.9l-.707.707a1 1 0 0 0 0 1.414l.707.707a5.955 5.955 0 0 0 1.415 1.415l.707.707a1 1 0 0 0 1.415 0l.707-.707a6 6 0 0 0 2.9 0l.707.707a1 1 0 0 0 1.414 0l.707-.707a5.955 5.955 0 0 0 1.415-1.415l.707-.707a1 1 0 0 0 0-1.414l-.707-.707a6 6 0 0 0 0-2.9l.707-.707a1 1 0 0 0 0-1.415l-.707-.707A5.955 5.955 0 0 0 12.12 2.12l-.707-.707a1 1 0 0 0-1.415 0l-.707.707a6 6 0 0 0-2.9 0l-.707-.707a1 1 0 0 0-1.414 0z"/></svg>
+        Settings
+      </button>
+    </nav>
+
+    <div class="sidebar-stats">
+      <div class="stat-row">
+        <span class="stat-label"><span class="stat-dot" style="background:var(--ink)"></span>Auth / Password</span>
+        <span class="stat-value" id="stat-auth">0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label"><span class="stat-dot" style="background:var(--green)"></span>HR / Leave</span>
+        <span class="stat-value" id="stat-hr">0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label"><span class="stat-dot" style="background:var(--blue)"></span>IT Support</span>
+        <span class="stat-value" id="stat-it">0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label"><span class="stat-dot" style="background:var(--amber)"></span>Billing</span>
+        <span class="stat-value" id="stat-billing">0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label"><span class="stat-dot" style="background:var(--purple)"></span>General</span>
+        <span class="stat-value" id="stat-general">0</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <div class="topbar-title" id="view-title">Classify Ticket</div>
+        <div class="topbar-sub" id="view-sub">NLP intent detection + auto-routing</div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn" id="btn-export">Export CSV</button>
+        <button class="btn btn-primary" id="btn-clear-all">Clear All</button>
+      </div>
+    </header>
+
+    <div class="content">
+      <!-- CLASSIFY VIEW -->
+      <div id="view-classify" class="view active">
+        <div class="input-zone">
+          <div class="input-wrap">
+            <textarea
+              id="ticket-input"
+              class="ticket-textarea"
+              placeholder="Paste or type a support ticket here…"
+            ></textarea>
+            <div class="input-footer">
+              <span class="char-count"><span id="char-count">0</span> chars</span>
+              <div class="input-actions">
+                <button class="clear-btn" id="btn-clear-input">Clear</button>
+                <button class="submit-btn" id="submit-btn" disabled>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M1 6h8M6 3l3 3-3 3"/></svg>
+                  Classify
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="examples-row" id="examples-container">
+          <span class="ex-label">EXAMPLES</span>
+          <span class="ex-chip" data-ex="I forgot my password, how do I reset it?">Forgot password</span>
+          <span class="ex-chip" data-ex="I can't log in, my password is showing as incorrect">Login failed</span>
+          <span class="ex-chip" data-ex="How do I check my leave balance?">Leave balance</span>
+          <span class="ex-chip" data-ex="My laptop is running very slow and keeps freezing">Laptop slow</span>
+          <span class="ex-chip" data-ex="I was charged twice for my subscription this month">Double charged</span>
+          <span class="ex-chip" data-ex="Where is the nearest parking spot?">Unknown</span>
+        </div>
+
+        <div class="processing" id="processing-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          Running NLP pipeline…
+        </div>
+
+        <div class="results" id="results-container"></div>
+      </div>
+
+      <!-- QUEUE VIEW -->
+      <div id="view-queue" class="view">
+        <div class="queue-section">
+          <div class="section-header">
+            <div class="section-title">All Classified Tickets</div>
+            <div class="section-meta" id="queue-meta">0 tickets</div>
+          </div>
+          <div id="queue-content">
+            <div class="empty-state">
+              <div class="empty-icon">○</div>
+              <div class="empty-text">No tickets classified yet. Use the Classify view to get started.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANALYTICS VIEW -->
+      <div id="view-analytics" class="view">
+        <div class="queue-section">
+          <div class="section-header">
+            <div class="section-title">Classification Analytics</div>
+            <div class="section-meta" id="analytics-meta">Session data</div>
+          </div>
+
+          <div class="analytics-grid">
+            <div class="metric-card">
+              <div class="metric-label">Total Classified</div>
+              <div class="metric-value" id="m-total">0</div>
+              <div class="metric-sub">tickets this session</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Avg Confidence</div>
+              <div class="metric-value" id="m-conf">—</div>
+              <div class="metric-sub">classification score</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">High Priority</div>
+              <div class="metric-value" id="m-high">0</div>
+              <div class="metric-sub">need immediate action</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Negative Sentiment</div>
+              <div class="metric-value" id="m-neg">0</div>
+              <div class="metric-sub">frustrated users</div>
+            </div>
+          </div>
+
+          <div class="chart-container">
+            <div class="chart-title">Ticket distribution by category</div>
+            <div class="bar-chart" id="dist-chart">
+              <div class="empty-text" style="font-size:12px;color:var(--ink-4)">No data yet</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS VIEW -->
+      <div id="view-settings" class="view">
+        <div class="queue-section">
+          <div class="section-header">
+            <div class="section-title">System Configuration</div>
+          </div>
+          <div class="settings-grid">
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-name">Auto-reply generation</div>
+                <div class="setting-desc">Generate suggested responses automatically on classification</div>
+              </div>
+              <button class="toggle on" id="tog-reply"></button>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-name">Sentiment analysis</div>
+                <div class="setting-desc">Detect emotional tone and urgency signals in ticket text</div>
+              </div>
+              <button class="toggle on" id="tog-sentiment"></button>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-name">Priority scoring</div>
+                <div class="setting-desc">Assign high / medium / low priority based on keywords and urgency</div>
+              </div>
+              <button class="toggle on" id="tog-priority"></button>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-name">SLA targets</div>
+                <div class="setting-desc">Time-to-resolution targets per category</div>
+              </div>
+              <select class="setting-select">
+                <option>Standard (8h / 24h / 48h)</option>
+                <option>Express (4h / 12h / 24h)</option>
+                <option>Enterprise (1h / 4h / 8h)</option>
+              </select>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-name">Confidence threshold</div>
+                <div class="setting-desc">Minimum score to auto-route; below this escalates to human</div>
+              </div>
+              <select class="setting-select" id="conf-threshold">
+                <option>60%</option>
+                <option selected>70%</option>
+                <option>80%</option>
+                <option>90%</option>
+              </select>
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <div class="setting-name">Classification model</div>
+                <div class="setting-desc">Algorithm used for intent detection</div>
+              </div>
+              <select class="setting-select">
+                <option selected>Keyword + TF-IDF hybrid</option>
+                <option>BERT embeddings (cosine sim)</option>
+                <option>Zero-shot classification</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module" src="./src/app.js"></script>
+</body>
+</html>
