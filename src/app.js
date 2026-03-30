@@ -66,3 +66,5 @@ qsa('.ex-chip').forEach(chip => {
 // Settings
 qsa('.setting-row .toggle').forEach(btn => {
   on(btn, 'click', toggleSetting);
+});
+
