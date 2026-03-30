@@ -1,10 +1,9 @@
 import { state, ticketCounter } from '../core/state.js';
-import { tokenize, analyzeSentiment, getPriority, classifyText } from '../core/nlp.js';
 import { CATEGORIES } from '../core/categories.js';
 import { updateSidebar, updateBadges } from '../components/sidebar.js';
 import { qs } from '../utils/dom.js';
 
-export function classifyTicket() {
+export async function classifyTicket() {
   const inputEl = qs('#ticket-input');
   const text = inputEl.value.trim();
   if (!text) return;
@@ -15,25 +14,38 @@ export function classifyTicket() {
   const processing = qs('#processing-bar');
   processing.classList.add('show');
 
-  setTimeout(() => {
+  try {
+    const res = await fetch('http://localhost:8000/api/classify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        text, 
+        settings: {
+          sentiment: state.settings.sentiment,
+          priority: state.settings.priority
+        } 
+      })
+    });
+    
+    if (!res.ok) throw new Error('API Error');
+    const apiResult = await res.json();
+    
     processing.classList.remove('show');
-
-    const result = classifyText(text);
-    const tokens = tokenize(text);
-    const sentiment = state.settings.sentiment ? analyzeSentiment(tokens) : 'neutral';
-    const priority = state.settings.priority && result.winner
-      ? getPriority(result.winner, sentiment, result.confidence)
-      : 'medium';
-
     ticketCounter.value++;
+    
     const ticket = {
       id: `TKT-${ticketCounter.value}`,
       text,
-      result,
-      sentiment,
-      priority,
+      result: {
+        winner: apiResult.winner,
+        scores: apiResult.scores,
+        confidence: apiResult.confidence,
+        matches: apiResult.matches
+      },
+      sentiment: apiResult.sentiment,
+      priority: apiResult.priority,
       timestamp: new Date(),
-      winner: result.winner
+      winner: apiResult.winner
     };
 
     state.tickets.unshift(ticket);
@@ -45,7 +57,13 @@ export function classifyTicket() {
     inputEl.value = '';
     qs('#char-count').textContent = '0';
     submitBtn.disabled = true;
-  }, 600 + Math.random() * 400);
+
+  } catch (err) {
+    console.error('Classification failed:', err);
+    processing.classList.remove('show');
+    submitBtn.disabled = false;
+    alert('Failed to connect to the backend API. Please ensure the Python server is running on http://localhost:8000');
+  }
 }
 
 function renderResult(ticket) {
